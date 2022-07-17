@@ -1,0 +1,15 @@
+.Navbar {
+	text-align: center;
+}
+
+#logo {
+	font-size: 30px;
+}
+
+.links {
+	margin-top: 10px;
+}
+
+.link-item {
+	margin: 10px;
+}

@@ -1,0 +1,16 @@
+.card {
+	margin: 20px 50px;
+	width: 600px;
+	padding: 40px 10px;
+	border-style: solid;
+	border-color: black;
+	border-width: 1px;
+}
+
+.originatorName {
+	text-align: right;
+}
+
+.buttons {
+	text-align: right;
+}

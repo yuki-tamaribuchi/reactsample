@@ -1,0 +1,1 @@
+docker compose -f .docker/docker-compose.yml run --rm react sh -c "npm install -g create-react-app && create-react-app reactsample" 
