@@ -4,16 +4,14 @@ import {
 	useDrop
 } from 'react-dnd';
 
-function DraggableCard({isDragging, data, id, index, moveListItem}) {
-	const [{opacity}, dragRef] = useDrag(
-		()=>({
-			type: 'card',
-			item: {data, id, index},
-			collect: (monitor) => ({
-				isDragging: monitor.isDragging(),
-			})
-		}),
-	)
+function DraggableCard({data, index, moveListItem}) {
+	const [{isDragging}, dragRef] = useDrag({
+		type: 'card',
+		item: {index},
+		collect: (monitor)=>({
+			isDragging: monitor.isDragging(),
+		})
+	})
 
 	const [spec, dropRef] = useDrop({
 		accept: 'card',
@@ -24,24 +22,23 @@ function DraggableCard({isDragging, data, id, index, moveListItem}) {
 			const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
 			const hoverActualY = monitor.getClientOffset().y - hoverBoundingRect.top
 
-			if (dragIndex<hoverIndex && hoverActualY < hoverMiddleY) return
-			if (dragIndex>hoverIndex && hoverActualY>hoverMiddleY) return
+			if (dragIndex < hoverIndex && hoverActualY < hoverMiddleY) return 
+			if (dragIndex > hoverIndex && hoverActualY > hoverMiddleY) return
 
 			moveListItem(dragIndex, hoverIndex)
 			item.index = hoverIndex
 		},
 	})
 
-	const ref = useRef(null)
+	const ref = useRef(null);
 	const dragDropRef = dragRef(dropRef(ref))
 
+	const opacity = isDragging ? 0:1
 	return (
-		<div ref={dragDropRef} style={{opacity}}>
-			<div className="card">
-				<p>{data.content}</p>
-				<div className="originatorName">
-					{data.originator.name}
-				</div>
+		<div className='card' stype={{opacity}} ref={dragDropRef}>
+			<p>{data.content}</p>
+			<div className='originatorName'>
+				{data.originator.name}
 			</div>
 		</div>
 	)
